@@ -1,0 +1,1635 @@
+﻿function getPieChartData(ajaxURL, Region ,province, Circ_Leg) {
+
+    $.ajax({
+        type: "POST",
+        url: ajaxURL,
+        data: JSON.stringify({ Region: Region, province: province, Circ_Leg: Circ_Leg }),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        cache: false,
+      
+        success: function (Result) {
+
+           // DataJson = $.parseJSON(data);
+            id_Conteneur = "ong1_container";
+            TitreLocalisation = "";
+            Result = Result.d;
+            var data = [];
+            for (var i in Result) {
+                var serie = new Array(Result[i].Name, Result[i].Value_decimal);
+                data.push(serie);
+            }
+            //pie_chart(Id div qui va contenir le chart, data sour format json, titre du graphe avec le niveau d'affichage[region,prov,commune,circ]);	 
+            //var chart = new Highcharts.Chart(pie_chart(id_Conteneur, data, TitreLocalisation));
+            //chart.redraw();
+             if (typeof Result[0] === 'undefined') {
+                nbrsiege = "";
+                souttitre = "";
+
+            } else { nbrsiege = Result[0].label; souttitre = ' عدد المترشحين'; }
+
+
+            if (data.length > 0) {
+                //pie_chart_pp(id_Conteneur, data, TitreLocalisation, nbrsiege, souttitre);
+                pie_chart_pp(id_Conteneur, data, TitreLocalisation, nbrsiege, souttitre);
+            } else {
+                alert('المعطيات التي تطلبونها غير متوفرة');
+            }
+
+
+        }
+    });
+}
+
+/**********************************************************/
+
+function getBarChart_couvertue(ajaxURL, Region, province, Circ_Leg) {
+
+    $.ajax({
+        type: "POST",
+        url: ajaxURL,
+        data: JSON.stringify({ Region: Region, province: province, Circ_Leg: Circ_Leg }),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        cache: false,
+
+        success: function (Result) {
+
+            // DataJson = $.parseJSON(data);
+            id_Conteneur = "ong2_container";
+            TitreLocalisation = "";
+            Result = Result.d;
+            var data = [];
+            var axe = [];
+            for (var i in Result) {
+               // var serie = new Array(Result[i].Name, Result[i].Value);
+                data.push(Result[i].Value_decimal);
+                axe.push(Result[i].Name);
+            }
+            //pie_chart(Id div qui va contenir le chart, data sour format json, titre du graphe avec le niveau d'affichage[region,prov,commune,circ]);	 
+            //var chart = new Highcharts.Chart(pie_chart(id_Conteneur, data, TitreLocalisation));
+            //chart.redraw();
+            barChart(id_Conteneur, data,axe, TitreLocalisation);
+        }
+    });
+}
+/**********************************************************/
+function getChartGenre(ajaxURL, Region, province, Circ_Leg) {
+
+    $.ajax({
+        type: "POST",
+        url: ajaxURL,
+        data: JSON.stringify({ Region: Region, province: province, Circ_Leg: Circ_Leg }),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        cache: false,
+
+        success: function (Result) {
+
+            // DataJson = $.parseJSON(data);
+            id_Conteneur = "ong3_container_genre";
+            TitreLocalisation = "";
+            Result = Result.d;
+            var homme = [];
+            var femme = [];
+
+           // for (var i in Result) {
+                // var serie = new Array(Result[i].Name, Result[i].Value);
+            if(typeof Result[0]!== 'undefined') {homme.push(Result[0].Value_decimal);}
+             if(typeof Result[1]!== 'undefined'){femme.push(Result[1].Value_decimal);}
+           // }
+            //pie_chart(Id div qui va contenir le chart, data sour format json, titre du graphe avec le niveau d'affichage[region,prov,commune,circ]);	 
+            //var chart = new Highcharts.Chart(pie_chart(id_Conteneur, data, TitreLocalisation));
+            //chart.redraw();
+            LinearGradien(id_Conteneur, homme, femme, TitreLocalisation);
+        }
+    });
+}
+/**********************************************************/
+function getPiechartNiveauEtude(ajaxURL, Region, province, Circ_Leg) {
+
+    $.ajax({
+        type: "POST",
+        url: ajaxURL,
+        data: JSON.stringify({ Region: Region, province: province, Circ_Leg: Circ_Leg }),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        cache: false,
+      
+        success: function (Result) {
+
+            // DataJson = $.parseJSON(data);
+            id_Conteneur = "ong3_container_nivetud";
+            TitreLocalisation = "";
+            Result = Result.d;
+            var data = [];
+            for (var i in Result) {
+                var serie = new Array(Result[i].Name, Result[i].Value_decimal);
+                data.push(serie);
+            }
+            //pie_chart(Id div qui va contenir le chart, data sour format json, titre du graphe avec le niveau d'affichage[region,prov,commune,circ]);	 
+            //var chart = new Highcharts.Chart(pie_chart(id_Conteneur, data, TitreLocalisation));
+            //chart.redraw();
+            pie_chart(id_Conteneur, data, TitreLocalisation);
+        }
+    });
+
+}
+/**************************************************************************/
+function getChatTracheAge(ajaxURL, Region, province, Circ_Leg) {
+
+    $.ajax({
+        type: "POST",
+        url: ajaxURL,
+        data: JSON.stringify({ Region: Region, province: province, Circ_Leg: Circ_Leg }),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        cache: false,
+
+        success: function (Result) {
+
+            // DataJson = $.parseJSON(data);
+            id_Conteneur = "ong3_container_tranche";
+            TitreLocalisation = "";
+            Result = Result.d;
+            var data = [];
+            for (var i in Result) {
+                // serie = serie + "{ name: '" + Result[i].Name + "', data: [" + Result[i].Value+"]},";
+                var serie = new Array(Result[i].Name, Result[i].Value_decimal);
+                  data.push(serie);
+
+
+            }
+           
+            //pie_chart(Id div qui va contenir le chart, data sour format json, titre du graphe avec le niveau d'affichage[region,prov,commune,circ]);	 
+            //var chart = new Highcharts.Chart(pie_chart(id_Conteneur, data, TitreLocalisation));
+            //chart.redraw();
+            pie_chart(id_Conteneur, data, TitreLocalisation);
+        }
+    });
+}
+
+
+
+
+/*************************Resultat*************************************************/
+function getListeElus_Leg(ajaxURL, Region, province, Circ_Leg) {
+
+    $.ajax({
+        type: "POST",
+        url: ajaxURL,
+        data: JSON.stringify({ Region: Region, province: province, Circ_Leg: Circ_Leg }),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        cache: false,
+
+        success: function (Result) {
+
+            // DataJson = $.parseJSON(data);
+            id_Conteneur = "ong3_container_tranche";
+            TitreLocalisation = "";
+            Result = Result.d;
+            var data = [];
+            // $('#listElutable').append("<tbody>");
+            for (var i in Result) {
+                var item = [Result[i].Circ, Result[i].Name, Result[i].NameOrgPolitique, Result[i].CodesymbomePartie, Result[i].Id_Candidat];
+                // $('#listBVtable').append("<tr><td style='font-weight:bold;'>" + Result[i].Circ + "</td><td style='font-weight:bold;'>" + Result[i].NumBureauVote + "</td><td style='font-weight:bold;'>" + Result[i].Adress + " </td><td style='font-weight:bold;'>" + Result[i].Lieu + "</td></tr>");
+                data.push(item);
+
+            }
+
+
+
+
+
+
+            $('#listElutable').dataTable({
+                "language": {
+                    "url": "../scripts/Arabic.txt"
+                },
+                "paging": true,
+                "ordering": false,
+                "searching": false,
+                "info": false,
+                "data": data,
+                "columns": [
+                    { "title": "الدائرة الانتخابية" },
+                    { "title": "الإسم الشخصي والعائلي" },
+                    { "title": "الانتماءالسياسي" },
+                    { "title": "الرمز", "class": "center" },
+                    { "title": "الصورة", "class": "center" }
+
+
+
+                ],
+                "columnDefs": [
+            {
+                // The `data` parameter refers to the data for the cell (defined by the
+                // `data` option, which defaults to the column being worked with, in
+                // this case `data: 0`.
+                "render": function (data, type, row) {
+                    return '<img src="logos_pp/' + data + '.JPG" style="width=300px;height=300px;" />';
+                },
+                "targets": 3 // column index 
+            },
+
+
+             {
+                 // The `data` parameter refers to the data for the cell (defined by the
+                 // `data` option, which defaults to the column being worked with, in
+                 // this case `data: 0`.
+                 "render": function (data, type, row) {
+                     return '<img src="photos_candidat/' + data + '.JPG" style="width=300px;height=300px;" />';
+                 },
+                 "targets": 4 // column index 
+             }
+
+                ]
+
+
+            });
+
+
+            // $('#listElutable').append("</tbody>")
+            //pie_chart(Id div qui va contenir le chart, data sour format json, titre du graphe avec le niveau d'affichage[region,prov,commune,circ]);	 
+            //var chart = new Highcharts.Chart(pie_chart(id_Conteneur, data, TitreLocalisation));
+            //chart.redraw();
+            //PiramideChart(id_Conteneur, data, TitreLocalisation);
+
+
+
+            /*
+                        <th>الدائرة الانتخابية</th>
+                                        <th>الإسم الشخصي والعائلي</th>
+                                        <th>الانتماءالسياسي</th>
+                                        <th>الرمز</th>
+                                        */
+        }
+    });
+
+}
+
+
+
+
+
+/*************************Resultat PV*************************************************/
+//function ResultatsDesPV_Leg(ajaxURL,Region,province, Circ_Leg) {
+
+//    $.ajax({
+//        type: "POST",
+//        url: ajaxURL,
+//        data: JSON.stringify({ Region: Region, province: province, Circ_Leg: Circ_Leg }),
+//        contentType: "application/json; charset=utf-8",
+//        dataType: "json",
+//        cache: false,
+
+//        success: function (Result) {
+
+//            // DataJson = $.parseJSON(data);
+//            id_Conteneur = "ong3_container_tranche";
+//            TitreLocalisation = "";
+//            Result = Result.d;
+//            var data = [];
+//            // $('#listElutable').append("<tbody>");
+//            for (var i in Result) {
+//                var item = [Result[i].Nom_Partis, Result[i].PrenomNom_Cand, format_Millier(Result[i].N_Voix), format_Millier(Result[i].N_Elus)];
+//                // $('#listBVtable').append("<tr><td style='font-weight:bold;'>" + Result[i].Circ + "</td><td style='font-weight:bold;'>" + Result[i].NumBureauVote + "</td><td style='font-weight:bold;'>" + Result[i].Adress + " </td><td style='font-weight:bold;'>" + Result[i].Lieu + "</td></tr>");
+//                data.push(item);
+
+//            }
+
+
+
+
+
+
+//            $('#ResultPVtable').dataTable({
+//                "language": {
+//                    "url": "../scripts/Arabic.txt"
+//                },
+//                "paging": true,
+//                "ordering": false,
+//                "searching": false,
+//                "info": false,
+//                "data": data,
+//                "columns": [
+//                      { "title": "الهيئة السياسية","width": "30%" }, 
+//                    { "title": "إسم وكيل اللائحة أو المرشح" ,"width": "26%"},
+//                    { "title": "عدد الأصوات المحصل عليها", "class": "center" ,"width": "29%"},
+//                    { "title": "عدد المقاعد", "class": "center" ,"width": "15%"}
+
+
+
+//                ]
+
+
+//            });
+
+
+//            // $('#listElutable').append("</tbody>")
+//            //pie_chart(Id div qui va contenir le chart, data sour format json, titre du graphe avec le niveau d'affichage[region,prov,commune,circ]);	 
+//            //var chart = new Highcharts.Chart(pie_chart(id_Conteneur, data, TitreLocalisation));
+//            //chart.redraw();
+//            //PiramideChart(id_Conteneur, data, TitreLocalisation);
+
+
+
+//            /*
+//                        <th>الدائرة الانتخابية</th>
+//                                        <th>الإسم الشخصي والعائلي</th>
+//                                        <th>الانتماءالسياسي</th>
+//                                        <th>الرمز</th>
+//                                        */
+//        }
+//    });
+
+//}
+
+
+function ResultatsDesVoix_Leg(ajaxURL,Region,province, Circ_Leg) {
+
+    $.ajax({
+        type: "POST",
+        url: ajaxURL,
+        data: JSON.stringify({ Region: Region, province: province, Circ_Leg: Circ_Leg }),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        cache: false,
+
+        success: function (Result) {
+
+            // DataJson = $.parseJSON(data);
+            id_Conteneur = "ong3_container_tranche";
+            TitreLocalisation = "";
+            Result = Result.d;
+            var data = [];
+            // $('#listElutable').append("<tbody>");
+            for (var i in Result) {
+                var item = [Result[i].Nom_Partis, format_Millier(Result[i].N_Voix), Result[i].Pourcentage_Voix];
+                // $('#listBVtable').append("<tr><td style='font-weight:bold;'>" + Result[i].Circ + "</td><td style='font-weight:bold;'>" + Result[i].NumBureauVote + "</td><td style='font-weight:bold;'>" + Result[i].Adress + " </td><td style='font-weight:bold;'>" + Result[i].Lieu + "</td></tr>");
+                data.push(item);
+
+            }
+
+
+
+
+
+
+            $('#ResultPVtable').dataTable({
+                "language": {
+                    "url": "../scripts/Arabic.txt"
+                },
+                "paging": true,
+                "ordering": false,
+                "searching": false,
+                "info": false,
+                "data": data,
+                "columns": [
+                    { "title": "الهيئة السياسية","width": "51%" }, 
+                    { "title": "عدد الأصوات المحصل عليها", "class": "center" ,"width": "29%"},
+                    { "title": "%", "class": "center" ,"width": "20%"}
+
+
+
+                ]
+
+
+            });
+
+
+            // $('#listElutable').append("</tbody>")
+            //pie_chart(Id div qui va contenir le chart, data sour format json, titre du graphe avec le niveau d'affichage[region,prov,commune,circ]);	 
+            //var chart = new Highcharts.Chart(pie_chart(id_Conteneur, data, TitreLocalisation));
+            //chart.redraw();
+            //PiramideChart(id_Conteneur, data, TitreLocalisation);
+
+
+
+            /*
+                        <th>الدائرة الانتخابية</th>
+                                        <th>الإسم الشخصي والعائلي</th>
+                                        <th>الانتماءالسياسي</th>
+                                        <th>الرمز</th>
+                                        */
+        }
+    });
+
+}
+
+/**************** Repartition par Partie ******************************************/
+
+function ResultatgetPieChartData_Leg(ajaxURL, Region ,province, Circ_Leg) {
+
+    $.ajax({
+        type: "POST",
+        url: ajaxURL,
+        data: JSON.stringify({ Region: Region, province: province, Circ_Leg: Circ_Leg }),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        cache: false,
+
+        success: function (Result) {
+       
+            // DataJson = $.parseJSON(data);
+            id_Conteneur = "ong1_container";
+            TitreLocalisation = "";
+            Result = Result.d;
+           
+            var data = [];
+            for (var i in Result) {
+                var serie = new Array(Result[i].Name, Result[i].Value_decimal);
+                data.push(serie);
+            }
+            //pie_chart(Id div qui va contenir le chart, data sour format json, titre du graphe avec le niveau d'affichage[region,prov,commune,circ]);	 
+            //var chart = new Highcharts.Chart(pie_chart(id_Conteneur, data, TitreLocalisation));
+            //chart.redraw();
+            if (typeof Result[0] === 'undefined') {
+                nbrsiege = "";
+                souttitre = "";
+            } else { nbrsiege = Result[0].label; souttitre = ' عدد المـقـاعد'; }
+
+
+            pie_chart_pp_Nbr(id_Conteneur, data, TitreLocalisation, nbrsiege, souttitre);
+        }
+    });
+}
+
+
+/**************** genre ******************************************/
+
+
+function ResultatgetChartGenre_Leg(ajaxURL, Region,province, Circ_Leg) {
+
+    $.ajax({
+        type: "POST",
+        url: ajaxURL,
+         data: JSON.stringify({ Region: Region, province: province, Circ_Leg: Circ_Leg }),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        cache: false,
+
+        success: function (Result) {
+
+            // DataJson = $.parseJSON(data);
+            id_Conteneur = "ong3_container_genre";
+            TitreLocalisation = "";
+            Result = Result.d;
+            var homme = [];
+            var femme = [];
+
+            // for (var i in Result) {
+            // var serie = new Array(Result[i].Name, Result[i].Value);
+            if (typeof Result[0] !== 'undefined') { homme.push(Result[0].Value_decimal); }
+            if (typeof Result[1] !== 'undefined') { femme.push(Result[1].Value_decimal); }
+            // }
+            //pie_chart(Id div qui va contenir le chart, data sour format json, titre du graphe avec le niveau d'affichage[region,prov,commune,circ]);	 
+            //var chart = new Highcharts.Chart(pie_chart(id_Conteneur, data, TitreLocalisation));
+            //chart.redraw();
+            LinearGradien(id_Conteneur, homme, femme, TitreLocalisation);
+        }
+    });
+}
+/**********************************************************/
+
+/**************** Niveau scolaire ******************************************/
+
+function ResultatgetPiechartNiveauEtude_Leg(ajaxURL, Region,province, Circ_Leg) {
+
+    $.ajax({
+        type: "POST",
+        url: ajaxURL,
+         data: JSON.stringify({ Region: Region, province: province, Circ_Leg: Circ_Leg }),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        cache: false,
+
+        success: function (Result) {
+
+            // DataJson = $.parseJSON(data);
+            id_Conteneur = "ong3_container_nivetud";
+            TitreLocalisation = "";
+            Result = Result.d;
+            var data = [];
+            for (var i in Result) {
+                var serie = new Array(Result[i].Name, Result[i].Value_decimal);
+                data.push(serie);
+            }
+            //pie_chart(Id div qui va contenir le chart, data sour format json, titre du graphe avec le niveau d'affichage[region,prov,commune,circ]);	 
+            //var chart = new Highcharts.Chart(pie_chart(id_Conteneur, data, TitreLocalisation));
+            //chart.redraw();
+            pie_chart(id_Conteneur, data, TitreLocalisation);
+        }
+    });
+
+}
+/**************************************************************************/
+/****************tranche d'age******************************************/
+
+
+function ResultatgetChatTracheAge_Leg(ajaxURL, Region,province, Circ_Leg) {
+
+    $.ajax({
+        type: "POST",
+        url: ajaxURL,
+         data: JSON.stringify({ Region: Region, province: province, Circ_Leg: Circ_Leg }),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        cache: false,
+
+        success: function (Result) {
+
+            // DataJson = $.parseJSON(data);
+            id_Conteneur = "ong3_container_tranche";
+            TitreLocalisation = "";
+            Result = Result.d;
+            var data = [];
+            for (var i in Result) {
+                var serie = new Array(Result[i].Name, Result[i].Value_decimal);
+                data.push(serie);
+            }
+            //pie_chart(Id div qui va contenir le chart, data sour format json, titre du graphe avec le niveau d'affichage[region,prov,commune,circ]);	 
+            //var chart = new Highcharts.Chart(pie_chart(id_Conteneur, data, TitreLocalisation));
+            //chart.redraw();
+            pie_chart(id_Conteneur, data, TitreLocalisation);
+        }
+    });
+}
+
+function ResultatTauxParticipation_Leg(ajaxURL, Region,province, Circ_Leg) {
+
+    RPM = [];
+    Speed = [];
+
+    $.ajax({
+        type: "POST",
+        url: ajaxURL,
+         data: JSON.stringify({ Region: Region, province: province, Circ_Leg: Circ_Leg }),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        cache: false,
+
+        success: function (Result) {
+
+            // DataJson = $.parseJSON(data);
+            id_Conteneur = "ong3_container_nivetud";
+            TitreLocalisation = "المستوى الوطني";
+            Result = Result.d;
+            var datalocal = [];
+            var datanationnal = [];
+            if (typeof Result[0] !== 'undefined') {
+                datalocal.push(Result[0].local_decimal);
+                datanationnal.push(Result[0].nationnal_decimal);
+            }
+            plotGauge(datalocal, datanationnal);
+
+            //RPM.push(Result[0].local);
+            //Speed.push(Result[0].nationnal);
+
+            //pie_chart(Id div qui va contenir le chart, data sour format json, titre du graphe avec le niveau d'affichage[region,prov,commune,circ]);	 
+            //var chart = new Highcharts.Chart(pie_chart(id_Conteneur, data, TitreLocalisation));
+            //chart.redraw();
+
+        }
+    });
+
+
+}
+
+
+
+//---------------------------------------------------Les Fonctions----------------------------------------------------------------------------
+
+function format_Millier(Valeur)
+{ 
+ Valeur += '';
+  var sep = ' ';
+  var reg = /(\d+)(\d{3})/;
+  while( reg.test( Valeur)) {
+    Valeur = Valeur.replace( reg, '$2' +sep +'$1');
+  }
+  return Valeur;
+
+}
+//--------------------------------------------------
+function pie_chart(conteneur, d_data, TitreLocalisation) {
+    var perShapeGradient = {
+        x1: 0,
+        y1: 0,
+        x2: 1,
+        y2: 0
+    };
+
+    //  var j_data = $.parseJSON(d_data);
+    $('#' + conteneur).highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+        colors: [
+            {
+                linearGradient: perShapeGradient,
+                stops: [
+                    [0, 'rgb(191, 191, 191)'],
+                    [1, 'rgb(152, 152, 152)']
+                ]
+            },
+            {
+                linearGradient: perShapeGradient,
+                stops: [
+                    [0, 'rgb(235, 201, 94)'],
+                    [1, 'rgb(222, 190, 90)']
+                ]
+            },
+            {
+                linearGradient: perShapeGradient,
+                stops: [
+                    [0, 'rgb(247, 111, 111)'],
+                    [1, 'rgb(220, 54, 54)']
+                ]
+            },
+            {
+                linearGradient: perShapeGradient,
+                stops: [
+                    [0, 'rgb(175, 91, 175)'],
+                    [1, 'rgb(153, 51, 153)']
+                ]
+            },
+
+            {
+                linearGradient: perShapeGradient,
+                stops: [
+                    [0, 'rgb(43, 133, 160)'],
+                    [1, 'rgb(12, 103, 137)']
+                ]
+            },
+            {
+                linearGradient: perShapeGradient,
+                stops: [
+                    [0, 'rgb(77, 175, 124)'],
+                    [1, 'rgb(72, 145, 122)']
+                ]
+            }
+
+
+        ],
+        title: {
+            text: TitreLocalisation
+        },
+        tooltip: {
+            enabled: false,
+            pointFormat: '<b>{point.y}%</b>',
+            rtl: true
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                size: '38%',
+                cursor: 'pointer',
+                distance: 1,
+                softConnector: false,
+				minSize: 1,
+                dataLabels: {
+                    enabled: true,
+                    color: '#000000',
+                    useHTML: true,
+                    allowOverlap: true,
+                    format: '<span style="font-size:10px"><b>{point.y} %</b></span><br/><span style="font-size:10px;width:90px;">{point.name}</span>'
+                     ,
+
+                    style: {
+                        color: 'black',
+                        textShadow: 'none',
+						 width: '90px'
+                    },
+                    connectorColor: 'silver'
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: TitreLocalisation,
+            data: d_data
+            //[['ابتدائي', 20], { name: 'عالى', y: 36, sliced: true, selected: true }, ['إعدادي', 24], ['ثانوي', 20]]
+            //    // d_data
+        }]
+    });
+
+}
+
+function pie_chart_2colors(conteneur, d_data, TitreLocalisation) {
+    var perShapeGradient = {
+        x1: 0,
+        y1: 0,
+        x2: 1,
+        y2: 0
+    };
+
+    //  var j_data = $.parseJSON(d_data);
+    $('#' + conteneur).highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+        colors: [            
+            {
+                linearGradient: perShapeGradient,
+                stops: [
+                    [0, 'rgb(247, 111, 111)'],
+                    [1, 'rgb(220, 54, 54)']
+                ]
+            },
+            {
+                linearGradient: perShapeGradient,
+                stops: [
+                    [0, 'rgb(97, 202, 181)'],
+                    [1, 'rgb(55, 176, 152)']
+                ]
+            },
+            {
+                linearGradient: perShapeGradient,
+                stops: [
+                    [0, 'rgb(175, 91, 175)'],
+                    [1, 'rgb(153, 51, 153)']
+                ]
+            },
+
+            {
+                linearGradient: perShapeGradient,
+                stops: [
+                    [0, 'rgb(43, 133, 160)'],
+                    [1, 'rgb(12, 103, 137)']
+                ]
+            },
+            {
+                linearGradient: perShapeGradient,
+                stops: [
+                    [0, 'rgb(77, 175, 124)'],
+                    [1, 'rgb(72, 145, 122)']
+                ]
+            }
+
+
+        ],
+        title: {
+            text: TitreLocalisation
+        },
+        tooltip: {
+            enabled: false,
+            pointFormat: '<b>{point.y}%</b>',
+            rtl: true
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                size: '38%',
+                cursor: 'pointer',
+                distance: 1,
+                softConnector: false,
+                minSize: 1,
+                dataLabels: {
+                    enabled: true,
+                    color: '#000000',
+                    useHTML: true,
+                    allowOverlap: true,
+                    format: '<span style="font-size:10px"><b>{point.y} %</b></span><br/><span style="font-size:10px;width:90px;">{point.name}</span>'
+                     ,
+
+                    style: {
+                        color: 'black',
+                        textShadow: 'none',
+                        width: '90px'
+                    },
+                    connectorColor: 'silver'
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: TitreLocalisation,
+            data: d_data
+            //[['ابتدائي', 20], { name: 'عالى', y: 36, sliced: true, selected: true }, ['إعدادي', 24], ['ثانوي', 20]]
+            //    // d_data
+        }]
+    });
+
+}
+
+
+function pie_chart_pp_Nbr(conteneur, d_data, TitreLocalisation, nbrsiege, soustitre) {
+    var perShapeGradient = {
+        x1: 0,
+        y1: 0,
+        x2: 1,
+        y2: 0
+    };
+
+    Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function (color) {
+        return {
+            radialGradient: {
+                cx: 0.5,
+                cy: 0.3,
+                r: 0.7
+            },
+            stops: [
+                [0, color],
+                [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
+            ]
+        };
+    });
+    $('#' + conteneur).highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            margin: [0, 0, 0, 0],
+            spacingTop: 0,
+            spacingBottom: 0,
+            spacingLeft: 0,
+            spacingRight: 0
+        },
+        title: {
+            text: soustitre
+        },
+
+        subtitle: {
+            text: '<b>' + nbrsiege + '</b>'
+        },
+        tooltip: {
+            enabled: true,
+            pointFormat: '<b>{point.y}</b>',
+            rtl: true
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                softConnector: false,
+                size: '40%',
+                borderWidth: 0,
+                dataLabels: {
+                    enabled: true,
+                    connectorPadding: 2,
+                    connectorWidth: 1,                
+                    allowOverlap: false,
+                    distance: 41,
+                    minSize: 1,
+                    format: '<span  style="font-size:8px">{point.name}</span>: <span style="font-size:8px"><b>{point.y}</b> </span>',
+
+                    color: '#000000',
+                    style: {
+                        color: 'black',
+                        textShadow: 'none'
+                    },
+                    connectorColor: 'silver',
+                    padding: 0
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: nbrsiege,
+            data: d_data
+            //[['ابتدائي', 20], { name: 'عالى', y: 36, sliced: true, selected: true }, ['إعدادي', 24], ['ثانوي', 20]]
+            //    // d_data
+        }]
+    });
+
+}
+function pie_chart_pp(conteneur, d_data, TitreLocalisation, nbrsiege, soustitre) {
+    var perShapeGradient = {
+        x1: 0,
+        y1: 0,
+        x2: 1,
+        y2: 0
+    };
+
+    Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function (color) {
+        return {
+            radialGradient: {
+                cx: 0.5,
+                cy: 0.3,
+                r: 0.7
+            },
+            stops: [
+                [0, color],
+                [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
+            ]
+        };
+    });
+    $('#' + conteneur).highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+        title: {
+            text: soustitre
+        },
+
+        subtitle: {
+            text: '<b>' + nbrsiege + '</b>'
+        },
+        tooltip: {
+            enabled: true,
+            pointFormat: '<b>{point.y}%</b>',
+            rtl: true
+        },
+        plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',					
+                    softConnector: false,
+					size: '34%',
+                    dataLabels: {
+                        enabled: true,
+                        allowOverlap: false,
+                        distance: 42,
+						minSize: 1,
+                        format: '<span><b>{point.y} %</b>: </span><span  style="font-size:9px">{point.name}</span>',
+                       
+                        color: '#000000',
+                        style: {
+                            color: 'black',
+                            textShadow: 'none'
+                        },
+                        connectorColor: 'silver',
+						padding:0
+                    }
+                }
+            },
+        series: [{
+            type: 'pie',
+            name: nbrsiege,
+            data: d_data
+            //[['ابتدائي', 20], { name: 'عالى', y: 36, sliced: true, selected: true }, ['إعدادي', 24], ['ثانوي', 20]]
+            //    // d_data
+        }]
+    });
+
+}
+
+
+
+
+
+
+/**************** Taux de couverture ******************************************/
+function barChart(conteneur, d_data, axe, TitreLocalisation) {
+
+    var perShapeGradient = {
+        x1: 0,
+        y1: 0,
+        x2: 1,
+        y2: 0
+    };
+
+    $('#' + conteneur).highcharts({
+        chart: {
+            type: 'bar'
+        },
+        colors: [
+            {
+                linearGradient: perShapeGradient,
+                stops: [
+                    [0, 'rgb(247, 111, 111)'],
+                    [1, 'rgb(220, 54, 54)']
+                ]
+            },
+            {
+                linearGradient: perShapeGradient,
+                stops: [
+                    [0, 'rgb(43, 133, 160)'],
+                    [1, 'rgb(12, 103, 137)']
+                ]
+            },
+            {
+                linearGradient: perShapeGradient,
+                stops: [
+                    [0, 'rgb(77, 175, 124)'],
+                    [1, 'rgb(72, 145, 122)']
+                ]
+            },
+
+            {
+                linearGradient: perShapeGradient,
+                stops: [
+                    [0, 'rgb(175, 91, 175)'],
+                    [1, 'rgb(153, 51, 153)']
+                ]
+            },
+            {
+                linearGradient: perShapeGradient,
+                stops: [
+                    [0, 'rgb(235, 201, 94)'],
+                    [1, 'rgb(222, 190, 90)']
+                ]
+            }
+        ],
+        title: {
+            text: ' '
+        },
+        subtitle: {
+            enabled: false
+        },
+        xAxis: {
+            categories: axe,//['PAM', 'PI', 'RNI', 'USFP', 'PJD', 'PPS', 'UC', 'PADS-CNI-PSU', 'PT', 'PRE', 'PEDD', 'PS', 'PCS', 'PRD', 'PML', 'PRV', 'PUD', 'PFC', 'SAP_N', 'PSD', 'PE', 'PLJS', 'PSU', 'PAN', 'UMD'],
+            title: {
+                text: null
+            }
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: ' ',
+                align: 'high'
+            },
+            labels: {
+                overflow: 'justify'
+            }
+        },
+        tooltip: {
+            formatter: function () {
+                // return Highcharts.numberFormat(this.y, 0) + '%'
+                return ' % ' + this.y + ' ' + this.series.name;
+            },
+            rtl: true
+        },
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true,
+                    allowOverlap: true,
+                    formatter: function () {
+                        return this.y + '%';
+
+                    },
+                    style: { "fontSize": "11px", "fontWeight": "200", "textShadow": "0 0 6px contrast, 0 0 3px contrast" }
+                }
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: 'نسبة التغطية',
+            data: d_data
+            //[10934, 10004, 7377, 7010, 4011, 2906, 2496, 1366, 966, 512, 414, 332, 246, 245, 238, 230, 204, 185, 72, 58, 54, 50, 45, 40, 25]
+        }]
+    });
+
+
+
+
+}
+
+
+
+/**************** genre ******************************************/
+function LinearGradien(conteneur, homme, femme, TitreLocalisation) {
+
+    var perShapeGradient = {
+        x1: 0,
+        y1: 0,
+        x2: 1,
+        y2: 0
+    };
+
+    var data = [{
+        name: 'رجال',
+        data: homme
+    }, {
+        name: 'نساء',
+        data: femme
+    }];
+
+    $('#' + conteneur).highcharts({
+        chart: {
+            type: 'bar'
+        },
+        colors: [
+        	{
+                linearGradient: perShapeGradient,
+                stops: [
+                    [0, 'rgb(58, 140, 171)'],
+                    [1, 'rgb(1, 112, 153)']
+                ]
+            }, {
+                linearGradient: perShapeGradient,
+                stops: [
+                    [0, 'rgb(199, 81, 81)'],
+                    [1, 'rgb(185, 1, 0)']
+                ]
+            },
+            {
+                linearGradient: perShapeGradient,
+                stops: [
+                    [0, 'rgb(43, 133, 160)'],
+                    [1, 'rgb(12, 103, 137)']
+                ]
+            },
+            {
+                linearGradient: perShapeGradient,
+                stops: [
+                    [0, 'rgb(77, 175, 124)'],
+                    [1, 'rgb(72, 145, 122)']
+                ]
+            },
+
+            {
+                linearGradient: perShapeGradient,
+                stops: [
+                    [0, 'rgb(175, 91, 175)'],
+                    [1, 'rgb(153, 51, 153)']
+                ]
+            },
+            {
+                linearGradient: perShapeGradient,
+                stops: [
+                    [0, 'rgb(235, 201, 94)'],
+                    [1, 'rgb(222, 190, 90)']
+                ]
+            }
+        ],
+        title: {
+            text: '',
+            style: {
+                display: 'none'
+            }
+        },
+        xAxis: {
+            min: 0,
+            lineWidth: 0,
+            minorGridLineWidth: 0,
+            lineColor: 'transparent',
+            title: {
+                text: '',
+                align: 'high'
+            },
+            labels: {
+                enabled: false//default is true
+            },
+            minorTickLength: 0,
+            tickLength: 0
+        },
+        yAxis: {
+            min: 0,
+            gridLineWidth: 0,
+            title: {
+                text: '',
+                align: 'high'
+            },
+            labels: {
+                enabled: false//default is true
+            }
+        },
+        legend: {
+            reversed: false,
+            align: 'center',
+            verticalAlign: 'middle',
+            layout: 'horizontal',
+            rtl: true,
+            itemMarginTop: 0,
+            x: -50,
+            y: 50,
+            itemDistance: 260,
+            lineHeight: 20,
+            margin: 0
+        },
+        plotOptions: {
+            series: {
+                stacking: 'normal'
+            },
+            bar: {
+                dataLabels: {
+                    enabled: true,
+                    formatter: function () {
+                        return this.y + " %";
+                    },
+                    style: {
+                        fontSize: '13px',
+                        fontFamily: 'Verdana, sans-serif'
+                    }
+                }
+            }
+        },
+        tooltip: {
+            formatter: function () {
+                var lib = this.series.name;
+                var val = this.y;
+                return "<b><span style='direction: rtl'>" + lib + " :  %" + val + "</span></b>";
+            },
+            rtl: true
+        },
+        series: data
+    });
+
+
+
+
+}
+
+
+
+
+/****************tranche d'age******************************************/
+function PiramideChart(conteneur, d_data, TitreLocalisation){
+
+    var perShapeGradient = {
+        x1: 0,
+        y1: 0,
+        x2: 1,
+        y2: 0
+    };
+
+    //var d_data = [
+    //                ['60 يساوي أو أكبر من',    20],
+    //                ['55-59',    9],
+    //                ['45-54',    20],
+    //                ['35-44', 23],
+    //                ['25-34',       21],
+    //                ['18-24',   7]
+    //]
+    
+    $('#'+conteneur).highcharts({
+        chart: {
+            type: 'pyramid',
+            marginRight: 100
+        },
+        colors: [
+        	{
+        	    linearGradient: perShapeGradient,
+        	    stops: [
+                    [0, 'rgb(191, 191, 191)'],
+                    [1, 'rgb(152, 152, 152)']
+        	    ]
+        	},
+            { 
+                linearGradient: perShapeGradient,
+                stops: [
+                    [0, 'rgb(235, 201, 94)'],
+                    [1, 'rgb(222, 190, 90)']
+                ]                
+            },
+            {
+                linearGradient: perShapeGradient,
+                stops: [
+                    [0, 'rgb(247, 111, 111)'],
+                    [1, 'rgb(220, 54, 54)']
+                ]                
+            },
+            {
+                linearGradient: perShapeGradient,
+                stops: [
+                    [0, 'rgb(175, 91, 175)'],
+                    [1, 'rgb(153, 51, 153)']
+                ]
+            },
+            
+            {
+                linearGradient: perShapeGradient,
+                stops: [
+                    [0, 'rgb(43, 133, 160)'],
+                    [1, 'rgb(12, 103, 137)']
+                ]                
+            },
+            {
+                linearGradient: perShapeGradient,
+                stops: [
+                    [0, 'rgb(77, 175, 124)'],
+                    [1, 'rgb(72, 145, 122)']
+                ]
+            } 
+            
+                   
+        ],
+        title: {
+            text: ' ',
+            x: -50
+        },
+        plotOptions: {
+            series: {
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b> ',
+                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black',
+                    softConnector: true
+                },
+                tooltip: {
+                    pointFormat: '<b>{point.y}</b> %<br/>', 
+                    shape: 'callout',       
+                    valueDecimals: null,  
+                    valuePrefix: null,   
+                    valueSuffix: null,  
+                    xDateFormat: null
+                }
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        series: [{
+            name: '',
+            data: d_data
+        }]
+    });
+
+
+}
+
+
+/*************************************************************************************************/
+function Cylindre(conteneur, d_data, TitreLocalisation) {
+
+  // var dj_data = JSON.stringify(d_data);
+    var perShapeGradient = {
+        x1: 0,
+        y1: 0,
+        x2: 1,
+        y2: 0
+    };
+
+    
+
+
+    $('#' + conteneur).highcharts({
+        chart: {
+            type: 'column',
+            options3d: {
+                enabled: true,
+                alpha: 15,
+                beta: 15,
+                viewDistance: 25,
+                depth: 40
+            },
+            marginTop: 0,
+            marginRight: 40
+        },
+        colors: [
+            {
+                linearGradient: perShapeGradient,
+                stops: [
+                    [0, 'rgb(152, 152, 152)'],
+                    [1, 'rgb(191, 191, 191)']
+                ]
+            },
+            {
+                linearGradient: perShapeGradient,
+                stops: [
+                    [0, 'rgb(247, 111, 111)'],
+                    [1, 'rgb(220, 54, 54)']
+                ]
+            },
+            {
+                linearGradient: perShapeGradient,
+                stops: [
+                    [0, 'rgb(43, 133, 160)'],
+                    [1, 'rgb(12, 103, 137)']
+                ]
+            },
+            {
+                linearGradient: perShapeGradient,
+                stops: [
+                    [0, 'rgb(77, 175, 124)'],
+                    [1, 'rgb(72, 145, 122)']
+                ]
+            },
+            {
+                linearGradient: perShapeGradient,
+                stops: [
+                    [0, 'rgb(175, 91, 175)'],
+                    [1, 'rgb(153, 51, 153)']
+                ]
+            },
+            {
+                linearGradient: perShapeGradient,
+                stops: [
+                    [0, 'rgb(235, 201, 94)'],
+                    [1, 'rgb(222, 190, 90)']
+                ]
+            }
+        ],
+        title: {
+            text: ' '
+        },
+        xAxis: {
+            categories: [],
+            labels: {
+                enabled: false //default is true
+            },
+            minorTickLength: 0,
+            tickLength: 0,
+            lineWidth: 0,
+        },
+        yAxis: {
+            min: 0,
+            gridLineWidth: 0,
+            title: {
+                text: 'Total fruit consumption'
+            },
+            lineWidth: 0,
+            minorGridLineWidth: 0,
+            lineColor: 'transparent',
+            title: {
+                text: '',
+                align: 'high'
+            },
+            labels: {
+                enabled: false //default is true
+            },
+            minorTickLength: 0,
+            tickLength: 0
+        },
+        legend: {
+            enabled: false
+            /*reversed: false,
+            align: 'right',
+            verticalAlign: 'right',
+            layout: 'vertical',
+            rtl: true,
+            itemMarginTop: 0,
+                                   x: -50,
+                                   y: 50,
+            itemDistance: 260,
+            lineHeight: 20,
+                                   margin: 0*/
+        },
+        tooltip: {
+            formatter: function() {
+                return this.y + " %"; // ' الفئة العمرية :'+this.series.name ;
+            },
+            shared: false
+        },
+        plotOptions: {
+            column: {
+                stacking: 'normal',
+                dataLabels: {
+                    enabled: true,
+                    formatter: function() {
+                        return '<span>' + this.series.name + ' </span>'; //return this.y+" %" ;
+                    },
+                    color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                    style: {
+                        textShadow: '0 0 3px black'
+                    }
+                },
+                depth: 40
+            }
+        },
+        series: d_data
+
+});
+
+
+
+
+}
+
+
+////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+function plotGauge(datalocal,datanationnal){
+
+    var gaugeOptions = {
+
+        chart: {
+            type: 'solidgauge'
+        },
+
+        title: null,
+
+        pane: {
+            center: ['50%', '85%'],
+            size: '140%',
+            startAngle: -90,
+            endAngle: 90,
+            background: {
+                backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || '#EEE',
+                innerRadius: '60%',
+                outerRadius: '100%',
+                shape: 'arc'
+            }
+        },
+
+        tooltip: {
+            enabled: false
+        },
+
+        // the value axis
+        yAxis: {
+            lineWidth: 0,
+            minorTickInterval: null,
+            tickPixelInterval: 400,
+            tickWidth: 0,
+            title: {
+                y: -70
+            },
+            labels: {
+                y: 16
+            }
+        },
+
+        plotOptions: {
+            solidgauge: {
+                dataLabels: {
+                    y: 5,
+                    borderWidth: 0,
+                    useHTML: true
+                }
+            }
+        }
+    };
+
+    // The speed gauge
+    $('#ong4_container_national').highcharts(Highcharts.merge(gaugeOptions, {
+        yAxis: {
+            stops: [
+                [0.1, '#a70303'], // green#55BF3B
+                [0.5, '#d72727'], // yellow
+                [0.9, '#ff6666'] // red
+            ],
+            min: 0,
+            max: 100,
+            title: {
+                text: 'على المستوى الوطني'
+            }
+        },
+
+        credits: {
+            enabled: false
+        },
+
+        series: [{
+            name: 'Speed',
+            data: datanationnal,
+            dataLabels: {
+                format: '<div style="text-align:center"><span style="font-size:25px;color:' +
+                    ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}%</span><br/>' +
+                       '<span style="font-size:12px;color:silver">&nbsp;</span></div>'
+            },
+            tooltip: {
+                valueSuffix: ' '
+            }
+        }]
+
+    }));
+
+
+    // The RPM gauge
+    $('#ong4_container_local').highcharts(Highcharts.merge(gaugeOptions, {
+        yAxis: {
+            stops: [
+                [0.1, '#01624a'], // green#55BF3B
+                [0.5, '#2f937a'], // yellow
+                [0.9, '#72ccb6'] // red
+            ],
+            min: 0,
+            max: 100,
+            title: {
+                text: 'على المستوى المحلي'
+            }
+        },
+
+        series: [{
+            name: 'RPM',
+            data: datalocal,
+            dataLabels: {
+                format: '<div style="text-align:center"><span style="font-size:25px;color:' +
+                    ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}%</span><br/>' +
+                       '<span style="font-size:12px;color:silver">&nbsp;</span></div>'
+            },
+            tooltip: {
+                valueSuffix: ' '
+            }
+        }]
+
+    }));
+
+}
+
+
+
+
+
+
+
+
+
+
