@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<!-- saved from url=(0061)http://www.elections.ma/elections/legislatives/resultats.aspx -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta content="IE=edge" http-equiv="X-UA-Compatible"><meta http-equiv="X-Frame-Options" content="deny"><meta content="width=device-width, initial-scale=1" name="viewport"><link href="./المملكة المغربية _ انتـخابـات 2016_files/font.css" rel="stylesheet" type="text/css"><link href="./المملكة المغربية _ انتـخابـات 2016_files/bootstrap.min.css" rel="stylesheet"><link href="./المملكة المغربية _ انتـخابـات 2016_files/MasterStyle.css" rel="stylesheet" type="text/css">
+    
+    <script src="./المملكة المغربية _ انتـخابـات 2016_files/jquery.min.js.téléchargement" type="text/javascript"></script>    
+    <script src="./المملكة المغربية _ انتـخابـات 2016_files/jquery-mi-ui.js.téléchargement" type="text/javascript"></script>
+    
+    <script src="./المملكة المغربية _ انتـخابـات 2016_files/bootstrap.min.js.téléchargement" type="text/javascript"></script>
+    <script src="./المملكة المغربية _ انتـخابـات 2016_files/jquery.Scroller-1.0.min.js.téléchargement" type="text/javascript"></script>
+    <script src="./المملكة المغربية _ انتـخابـات 2016_files/ar.marquee.js.téléchargement" type="text/javascript"></script>
+    
+    <link id="Link4" href="./المملكة المغربية _ انتـخابـات 2016_files/jquery.qtip.css" rel="stylesheet" type="text/css">
+    <script src="./المملكة المغربية _ انتـخابـات 2016_files/jquery.qtip.js.téléchargement" type="text/javascript"></script>
+
+     <script src="./المملكة المغربية _ انتـخابـات 2016_files/jquery.bootstrap.newsbox.min.js.téléchargement" type="text/javascript"></script>
+    <link href="./المملكة المغربية _ انتـخابـات 2016_files/jquery.lightslider.css" rel="stylesheet" type="text/css">
+    <script src="./المملكة المغربية _ انتـخابـات 2016_files/jquery.lightslider.js.téléchargement" type="text/javascript"></script>
+    <script src="./المملكة المغربية _ انتـخابـات 2016_files/script.js.téléchargement" type="text/javascript"></script>
+    <!--[if lt IE 9]>
+      <script src="/js/html5shiv.min.js"></script>
+      <script src="/js/respond.min.js"></script>
+    <![endif]-->
+     <title>
+	المملكة المغربية | انتـخابـات 2016
+</title>
+        <link href="./المملكة المغربية _ انتـخابـات 2016_files/StatStyle.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="./المملكة المغربية _ انتـخابـات 2016_files/bootstrap.rtl.css" type="text/css">
+        <link href="./المملكة المغربية _ انتـخابـات 2016_files/bootstrap-responsive.rtl.css" rel="stylesheet" type="text/css">
+        <script type="text/javascript" src="./المملكة المغربية _ انتـخابـات 2016_files/stats_onglet.js.téléchargement"></script>
+        <script type="text/javascript" src="./المملكة المغربية _ انتـخابـات 2016_files/stats_graphs_Leg.js.téléchargement"></script>
+        <link href="./المملكة المغربية _ انتـخابـات 2016_files/jquery.dataTables.css" rel="stylesheet"> 
+        <script type="text/javascript" src="./المملكة المغربية _ انتـخابـات 2016_files/jquery.dataTables.js.téléchargement"></script>
+
+      
+        <script type="text/javascript" src="./المملكة المغربية _ انتـخابـات 2016_files/highcharts.js.téléchargement"></script>
+        <script type="text/javascript" src="./المملكة المغربية _ انتـخابـات 2016_files/funnel.js.téléchargement"></script>
+        <script type="text/javascript" src="./المملكة المغربية _ انتـخابـات 2016_files/highcharts-more.js.téléchargement"></script>
+        <script type="text/javascript" src="./المملكة المغربية _ انتـخابـات 2016_files/solid-gauge.js.téléchargement"></script>
+        <script type="text/javascript" src="./المملكة المغربية _ انتـخابـات 2016_files/no-data-to-display.js.téléchargement"></script>
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+                //$("#DDLProvince").prop("disabled", true);
+                $('.ong_stat').removeClass("act").addClass("desact");
+                $(".ong_data").hide();
+
+                $('#buttonRec').click(function () {
+
+                    //                 $('.ong_stat').removeClass("act").addClass("desact");
+                    //                 $(".ong_data").hide();
+                    var sr = document.getElementById("buttonRec").src.split('/');
+                    if (sr[sr.length - 1] == "search0.png") {
+                        // if ($('#DDLCommune').val() != null && $('#DDLCommune').val() != 0) {
+                        $("#DDLRegion").prop("disabled", true);
+                        $("#DDLProvince").prop("disabled", true);
+                        $("#DDLCirc_Leg").prop("disabled", true);
+                        // }
+
+                        $('#buttonRec').attr('src', '../../images/search1.png');
+                    } else {
+                        $("#DDLRegion").prop("disabled", false);
+                        $("#DDLProvince").prop("disabled", false);
+                        $("#DDLCirc_Leg").prop("disabled", false);
+                        $('#buttonRec').attr('src', '../../images/search0.png');
+
+                        $("#DDLRegion").val(0).change();
+
+
+
+                        $('.ong_stat').removeClass("act").addClass("desact");
+                        $(".ong_data").hide();
+
+                        //                     $(".ong_stat").removeClass("act");
+                        //                     $(".ong_data").hide();
+                        return;
+                    }
+
+
+                    var Region = $('#DDLRegion').val();
+                    var province = ($('#DDLProvince').val() == null ? 0 : $('#DDLProvince').val());
+                    var Circ_Leg = ($('#DDLCirc_Leg').val() == null ? 0 : $('#DDLCirc_Leg').val());
+
+
+
+                    //                     $('#DDLRegion').onchange(function () {
+                    //                         if (Region == 0) { $("#DDLProvince").prop("disabled", true); } else { $("#DDLProvince").prop("disabled", false); } 
+                    //                     });
+
+                    var est_bloc_active = 0;
+
+
+
+                    if ((Circ_Leg != 999 && Circ_Leg != 0) || (Region == 0 && Circ_Leg == 999)) {
+                        $('#link_ong1').removeClass("desact").addClass("act");
+                        $('#ong1').show();
+                        est_bloc_active = 1;
+                    }
+
+                    if ((Circ_Leg != 998 && Circ_Leg != 0) || (Region == 0 && Circ_Leg == 999)) {
+                        $('#link_ong2').removeClass("desact");
+                        if (est_bloc_active == 0) {
+                            $('#link_ong2').removeClass("desact").addClass("act");
+                            $('#ong2').show();
+                        }
+                    }
+
+
+
+
+                    if (Region == 0) { $('#ong4_container_local').hide(); } else { $('#ong4_container_local').show(); }
+
+
+
+                    $('#link_ong3').removeClass("desact");
+                    $('#link_ong4').removeClass("desact");
+                    $('#link_ong5').removeClass("desact");
+                    //if (Circ_Leg != 0) { $('#link_ong5').removeClass("desact"); }
+
+                    if (est_bloc_active == 0) {
+                        $('#link_ong3').addClass("act");
+                        $('#ong3').show();
+                    }
+
+
+                    if ((Circ_Leg != 999 && Circ_Leg != 0) || (Region == 0 && Circ_Leg == 999)) { ResultatsDesVoix_Leg("../../ElectionLegislatives.asmx/getListResultVoix", Region, province, Circ_Leg); }
+                    if ((Circ_Leg != 998 && Circ_Leg != 0) || (Region == 0 && Circ_Leg == 999)) { getListeElus_Leg("../../ElectionLegislatives.asmx/getListElus", Region, province, Circ_Leg); }
+                    ResultatgetPieChartData_Leg("../../ElectionLegislatives.asmx/getstatparties", Region, province, Circ_Leg);
+                    ResultatgetChartGenre_Leg("../../ElectionLegislatives.asmx/getStatGenre", Region, province, Circ_Leg);
+                    ResultatgetPiechartNiveauEtude_Leg("../../ElectionLegislatives.asmx/getStatNiveauEtude", Region, province, Circ_Leg);
+                    ResultatgetChatTracheAge_Leg("../../ElectionLegislatives.asmx/getStatTracheAge", Region, province, Circ_Leg);
+                   // if (Circ_Leg != 0) { 
+                    ResultatTauxParticipation_Leg("../../ElectionLegislatives.asmx/getTauxParticipation", Region, province, Circ_Leg); //}
+
+
+                });
+
+
+
+            });
+          </script>
+
+
+
+</head>
+<body>
+ <div class="container" id="global">
+        <header class="row">
+            <div class="titre">
+                <img src="./المملكة المغربية _ انتـخابـات 2016_files/logo.png" alt="انتـخابـات 2016" title="انتـخابـات 2016">                
+            </div>
+        </header>
+       
+        <nav class="row" id="menu">
+            <ul dir="rtl" id="nav">
+                <li id="home"><a href="http://www.elections.ma/index.aspx">&nbsp; </a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" href="http://www.elections.ma/elections/legislatives/resultats.aspx#">ﺍﻟﻨﺎﺧﺏ</a>
+                    <ul class="dropdown-menu pull-right">
+                            <li><a href="http://www.elections.ma/electeur/legislatives/mon_bureau_vote.aspx">التعرف على مكتب التصويت</a></li>
+                            <li><a href="http://www.elections.ma/electeur/legislatives/comment_voter.aspx">كيفية التصويت</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown active">
+                    <a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" href="http://www.elections.ma/elections/legislatives/resultats.aspx#">ﺍلاﻧﺘﺨﺎﺑﺎﺕ</a>
+                    <ul class="dropdown-menu pull-right">
+                        <li><a href="http://www.elections.ma/elections/legislatives/resultats.aspx">الانتخابات التشريعية 2016</a></li>
+                        <li class="dropdown-submenu"><a href="http://www.elections.ma/elections/legislatives/resultats.aspx#">ﺍلاستحقاقات السابقة <span class="caret"></span></a>
+                            <ul class="dropdown-menu">                                                                
+                                <li><a href="http://www.elections.ma/elections/professionnelles/resultats.aspx">انتخابات الغرف المهنية</a></li>
+                                <li><a href="http://www.elections.ma/elections/regionales/resultats.aspx">الانتخابات الجهوية</a></li>
+                                <li><a href="http://www.elections.ma/elections/communales/resultats.aspx">الانتخابات الجماعية</a></li>
+                                <li><a href="http://www.elections.ma/elections/prov_pref/resultats.aspx">انتخابات مجالس العمالات والأقاليم</a></li>
+                                <li><a href="http://www.elections.ma/elections/conseillers/resultats.aspx">انتخابات مجلس المستشارين</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="http://www.elections.ma/communiques/legislatives/communiques.aspx">بلاغات</a></li>
+                <li><a href="http://www.elections.ma/documentations/legislatives/reglementation_nouveaute.aspx">ﺍﻟﺘﻭﺛﻴﻖ</a></li>           
+                <li><a href="http://www.elections.ma/faq/legislatives/faq.aspx">ﺃﺳﺌﻠﺔ وأجوبة</a></li>     
+                <li class="dropdown last">
+                    <a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" href="http://www.elections.ma/elections/legislatives/resultats.aspx#">فضاء التواصل</a>
+                    <ul class="dropdown-menu pull-left">
+                        <li><a href="http://www.elections.ma/echange/legislatives/mises_au_point.aspx">بيانات حقيقة</a></li>
+                        <li><a href="http://www.elections.ma/echange/legislatives/mediatheque.aspx">صوت و صورة</a></li>
+                    </ul>
+                </li> 
+                <li class="hidden">&nbsp;</li>
+            </ul>
+        </nav>
+
+
+        <section class="row" id="contenu">
+            <div class="col-sm-12">
+                <div class="col-sm-12 message" style="display: none; cursor: default;">
+                    <div class="scrollingtext" style="display: none; left: 374.615px;"></div>
+                </div>
+            </div>
+
+            <div class="row no-margin firstContentLine">
+
+                <div class="col-sm-9 col-xs-12 padOnlyLeft contentSide">
+                    <div class="block" id="contentBlock" style="min-height: 566px;">
+                        <form method="post" action="http://www.elections.ma/elections/legislatives/resultats.aspx" id="form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="">
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="">
+<input type="hidden" name="__LASTFOCUS" id="__LASTFOCUS" value="">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="SDU2gwsNalGHF+r9b13z9Aa35NGqAqykPH3tdBXB4QEBvc9t9LuFtOS8cDHguVBLarHWPXXgvnwXcYSFMwQd4GuNfRTJXK0L6nF7JOuTwso/tYO+0u5NzzGjVK1tegH1qxFGmHenEvR6ZJoY7B5yU4eJdSmdTehTYrItKYcTDieN+RQbqnXduyKuZOUYowGAsjGnzU3ATUCXOKgTu9UYi3ENYf4fM/mE6NvZw3ZEbTTgV35spTOrPwgVRDtKfcbrT98zmLs7LM47PiwzRnrd8sueWv9/5KUWH+FXOUc66F94L8mhiEYd50a5XxaATri4UZ0vI58SMXKb4rQkQywshvoFm6/lDqAGa85rUQHoBZuDu2Dptps4dDNcFu9AZHdJtuAyvMciTswGXOP9x3P4QIkjK5rlycOjpKwgQ+DaJZBQgunvfVQw8CuU6/U0dc0Os7fDKZMOSPKSiB9UGAmJKi1kQYzR36Ru10/aH9++yokCwLMd9GVz96Gmb3wt6Jss5gcBMV6GMqE24m/woJEpCnpAyWU8PLXbYcUcjbTtg+dy7beUoSBhTDMXU4bHUgP9xSL9DJT+Xr/gYPIWvqXQZW3peEQve+KTinYuov23TWP51IYlT149ViLag6Ty87bqAMODMUpRKs4CPtLXs9FlJVGU34pCOrCewAgm/OY8ok57XWIudo8C193Epi+7MoWnX0tQ4bAjCsKaIhn2j3ob/ZSOVCYGHl/yC1Rp2yXT6U1aEyGqsD66+b+KN7aE7zQbaK6A5suW2U7p2g30vKi38KkNG0UHI0JApZW0vcXeR159oXtaEEEntp7WuhR4nah+qa2ZmM5sTmjMwqwjTKnKmDKJb/IJgrNzHhWucbdE7BPsHcj3kg/9pHJj39+15VroonaEMBQYC0EiSzFgLYkuHTLHTKBoh76SGivSir+M6+25tDqcE6XknAJts/ilhW7KSqaz6jxfK+KEzxKJmmEzT6etcacctdkDCLXFF5FKbrYBqhfp9c29pHcd+HsR35HH+eU2//WRUbPLFP+sbZF7pQJyOvBM/Xs1Ij7FsPhC5Q+Rue1sTfWXe2hnqXe4BJQ8jujyiWzGLXXU5VrADzxwQeTkBQ4oqOJTtlSXzWdZAS8qoTjLEmK3XksaGJi+wHgqAqtgp3ftqXcXN/Ntc9jr8ka/QLlVkB8HLsr0ly62m9YqADLD1x2LTkqR4neaxcVfgp0Xw11fn14wUazwgTvt6ZlM98yfrqgWjgu7AG4Ya1Mi20qx9BmYNOXuwb2yJx62srfo2SOwSM1c2IvA/nLv1B7TzgUJQ/yjLOnzYAm8TbsVlx5F9l/A+v4ncot0TUMwfdffBlagcXWJqygwW7odFZWPhFKbTxoDv6XhLl5mFSITjsc5U+rWZOr3L+PLNl/9Pp5u2rm3bHSBCWxCYgA2Zg==">
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['form1'];
+if (!theForm) {
+    theForm = document.form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="./المملكة المغربية _ انتـخابـات 2016_files/WebResource.axd" type="text/javascript"></script>
+
+
+<script src="./المملكة المغربية _ انتـخابـات 2016_files/ScriptResource.axd" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+if (typeof(Sys) === 'undefined') throw new Error('ASP.NET Ajax client-side framework failed to load.');
+//]]>
+</script>
+
+<script src="./المملكة المغربية _ انتـخابـات 2016_files/ScriptResource(1).axd" type="text/javascript"></script>
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="6D7A083A">
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="YpwC2bHyY82jE6sZJ5uMsTFUx9OM/toFyI6fUQq5yrDZ3TjdmsE+Zah27ZyPgeGl3toj4mNXSNsARD5ll9B5IMDtC+LupXLOLpep2h+sLDy1SgnIY5yy4LnFWZ7UGgIOY/SxQaMauE5DQfFkFjQaSCk42tuhbaumQda4w18plnVWYCTWqUrAEWM9ySoXjSoSEakoa2STz2GSzK8WHBjhDItkt2iUbqvsbgzpG14oI6fKbu+SvDXyeBtOeZ7vX7QroIQRpzn3IdM49ehlFzV4mUwdaJg8Rs04LrK567BOgCzomWVAxTDlvJIAwZYfaRt149L6UPIlMeU699k1pzLPR4hRO7uLWNz6mGgAcYrhQYU/5hH+vdZB1wBgTtCyz7uie5ux8oIQDrAq6stL/1v1ADxsWeKSKx/dsRDrfnjbJPbGPWqgnESqjf37bNs/rHnJHXv/7eXs0z1N4XlA9Qk72X77VJ1W8cIEkSFrRfbs5sC0mHfGurtAcOMxljbU+62K">
+</div>
+                        <div>
+                            
+     <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ctl00$ContentPlaceHolder1$ScriptManager1', 'form1', ['tctl00$ContentPlaceHolder1$UpdatePanel1','ContentPlaceHolder1_UpdatePanel1'], [], [], 90, 'ctl00');
+//]]>
+</script>
+  
+    <div class=" title green">
+        نتائج الانتخابات التشريعية
+    </div>
+    <div class="pageContent">
+        
+        <div class="stats_filter">      
+            <div class="row-fluid">  
+                <div id="ContentPlaceHolder1_UpdatePanel1">
+	                                                                                                          
+                        <div class="span10">
+                            <div class="row-fluid">                                                                                                           
+                                <div class="span2">
+                                    جهة
+                                </div>
+                                <div class="span4">
+                                    <select name="ctl00$ContentPlaceHolder1$DDLRegion" onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$ContentPlaceHolder1$DDLRegion\&#39;,\&#39;\&#39;)&#39;, 0)" id="DDLRegion" tabindex="1" class="ui-widget-text" style="width:150px;">
+		<option selected="selected" value="0">-المستوى الوطني-</option>
+		<option value="1">طنجة- تطوان -الحسيمة</option>
+		<option value="2">الشرق</option>
+		<option value="3">فاس- مكناس</option>
+		<option value="4">الرباط -سلا -القنيطرة</option>
+		<option value="5">بني ملال -خنيفرة</option>
+		<option value="6">الدار البيضاء-سطات</option>
+		<option value="7">مراكش- آسفي</option>
+		<option value="8">درعة -تافيلالت</option>
+		<option value="9">سوس- ماسة</option>
+		<option value="10">كلميم -واد نون</option>
+		<option value="11">العيون- الساقية الحمراء</option>
+		<option value="12">الداخلة- وادي الذهب</option>
+
+	</select>
+                                </div>
+                                <div class="span2">
+                                     عمالة أو إقليم  
+                                </div>
+                                <div class="span4">
+                                    <select name="ctl00$ContentPlaceHolder1$DDLProvince" onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$ContentPlaceHolder1$DDLProvince\&#39;,\&#39;\&#39;)&#39;, 0)" id="DDLProvince" disabled="disabled" tabindex="2" class="aspNetDisabled ui-widget-text" style="width:150px;">
+		<option selected="selected" value="0">-اختر العمالة أو الإقليم-</option>
+
+	</select>
+                                </div>
+                            </div>
+
+                            <div class="row-fluid">
+                                <div class="span2">             
+                                    الدائرة الإنتخابية البرلمانية   
+                                </div>
+                                <div class="span8">
+                                    <select name="ctl00$ContentPlaceHolder1$DDLCirc_Leg" id="DDLCirc_Leg" tabindex="4" class="ui-widget-text" style="width:150px;">
+		<option value="999">-الدائرة الوطنية-</option>
+		<option value="998">-الدوائر المحلية-</option>
+		<option value="0">-جميع الدوائر-</option>
+
+	</select>
+                                </div>                                                                                                          
+                            </div> 
+                        </div> 
+                    
+</div>
+                <div class="span2">
+                    <img alt="" id="buttonRec" src="./المملكة المغربية _ انتـخابـات 2016_files/search0.png">
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="stats_submenu">
+            <a id="link_ong1" href="http://www.elections.ma/elections/legislatives/resultats.aspx#" class="desact ong_stat">
+			   توزيع الأصوات المعبر عنها
+            </a> 
+
+            <a id="link_ong2" href="http://www.elections.ma/elections/legislatives/resultats.aspx#" class="desact ong_stat">
+			    لائحة المنتخبين
+            </a> 
+            <a id="link_ong3" href="http://www.elections.ma/elections/legislatives/resultats.aspx#" class="desact ong_stat">
+				توزيع المقاعد حسب الهيئات السياسية
+            </a> 
+            <a id="link_ong4" href="http://www.elections.ma/elections/legislatives/resultats.aspx#" class="desact ong_stat">
+                إحصائيات نوعية
+            </a>  
+            <a id="link_ong5" href="http://www.elections.ma/elections/legislatives/resultats.aspx#" class="desact ong_stat">
+                نسبة المشاركة
+            </a>                      	
+        </div>
+
+
+        <div class="ong_data" id="ong1" style="direction: rtl; display: none;">
+          <table id="ResultPVtable" class="table table_rez display"></table>
+        </div>
+
+
+        <div class="ong_data" id="ong2" style="direction: rtl; display: none;">
+             <table id="listElutable" class="table table_rez display"></table>
+        </div>
+
+        <div class="ong_data" id="ong3" style="direction: rtl; display: none;">
+            <div id="ong1_container"></div>
+        </div>
+
+
+        <div class="ong_data" id="ong4" style="display: none;">   
+            <div class="row-fluid">
+                <div class="span12">
+                    <span>توزيع المنتخبين حسب النوع</span>
+                    <div id="ong3_container_genre"></div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span6">
+                    <span>توزيع المنتخبين حسب الفئات العمرية</span>
+                        <div class="span5" id="ong3_container_tranche"></div>
+                </div>
+                <div class="span6">
+                    <span>توزيع المنتخبين حسب المستوى الدراسي</span>
+                        <div class="span5" id="ong3_container_nivetud"></div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="ong_data" id="ong5" style="direction: rtl; display: none;">
+	        <div id="ong4_container_national" style="width: 300px; height: 200px; float: left"></div>
+	        <div id="ong4_container_local" style="width: 300px; height: 200px; float: left"></div>
+
+        </div>
+    </div>
+
+                        </div>
+                        </form>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    
+                </div>
+				<div class="col-xs-1 visible-xs-block" style="position: absolute;right:0">
+					<div id="closeOpenSideMenu">
+						<div class="closed" id="closeOpenSideMenuButton"></div>
+					</div>
+				</div>
+				<div class="col-sm-3 sidebar closed">
+                    <nav class="block">
+                         <div class="sideMenuTitle title red">
+                          فضاء الانتخابات
+                        </div>
+
+                        <ul class="sideMenu panel-group" id="accordion">
+                            <li class="panel"><div class="MenuGrouper"> <a data-toggle="collapse" data-parent="#accordion" href="http://www.elections.ma/elections/legislatives/resultats.aspx#collapse0" class="" aria-expanded="true"><span>الانتخابات التشريعية<br><span style="font-size:0.65em">اقتراع 7 أكتوبر 2016</span></span></a></div>
+								<ul id="collapse0" class="panel-collapse collapse in" aria-expanded="true" style="">							                
+							        <li><a href="http://www.elections.ma/elections/legislatives/corps_electoral.aspx"><span>الهيئة الناخبة</span></a></li> 
+                                    <li><a href="http://www.elections.ma/elections/legislatives/organe_politique.aspx"><span>لائحة الهيئات السياسية المشاركة</span></a></li> 
+                                    <li><a href="http://www.elections.ma/elections/legislatives/candidature.aspx">إحصائيات الترشيحات</a></li>
+							        <li class="active"><a href="http://www.elections.ma/elections/legislatives/resultats.aspx">النتائج</a></li>
+            					</ul>
+							</li>
+							<li class="panel"><div class="MenuGrouper"> <a data-toggle="collapse" data-parent="#accordion" href="http://www.elections.ma/elections/legislatives/resultats.aspx#collapseOne" class="collapsed" aria-expanded="false"><span>انتخابات الغرف المهنية</span></a></div>
+								<ul id="collapseOne" class="panel-collapse collapse" aria-expanded="false">
+							        <li><a href="http://www.elections.ma/elections/professionnelles/organe_politique.aspx"><span>لائحة الأحزاب السياسية المشاركة</span></a></li> 
+                                    <li><a href="http://www.elections.ma/elections/professionnelles/candidature.aspx">إحصائيات الترشيحات</a></li>
+							        <li><a href="http://www.elections.ma/elections/professionnelles/resultats.aspx">النتائج</a></li>		                                        					           
+            					</ul>
+							</li>
+							<li class="panel"><div class="MenuGrouper"> <a data-toggle="collapse" data-parent="#accordion" href="http://www.elections.ma/elections/legislatives/resultats.aspx#collapseTwo" class="collapsed" aria-expanded="false"><span>الانتخابات الجهوية</span> </a></div>
+								<ul id="collapseTwo" class="panel-collapse collapse" aria-expanded="false">							            
+                                    <li><a href="http://www.elections.ma/elections/regionales/organe_politique.aspx"><span>لائحة الهيئات السياسية المشاركة</span></a></li>    
+                                    <li><a href="http://www.elections.ma/elections/regionales/candidature.aspx">إحصائيات الترشيحات</a></li>
+							        <li><a href="http://www.elections.ma/elections/regionales/resultats.aspx"><span>نتائج الانتخابات الجهوية</span></a></li>
+                                    <li><a href="http://www.elections.ma/elections/regionales/resultats_bureaux.aspx"><span>نتائج انتخاب مكاتب المجالس الجهوية</span></a></li>
+							            
+            					</ul>
+							</li>
+							<li class="panel"><div class="MenuGrouper"><a data-toggle="collapse" data-parent="#accordion" href="http://www.elections.ma/elections/legislatives/resultats.aspx#collapseThree" class="collapsed" aria-expanded="false"><span>الانتخابات الجماعية</span> </a></div>
+								<ul id="collapseThree" class="panel-collapse collapse" aria-expanded="false">
+							        <li><a href="http://www.elections.ma/elections/communales/organe_politique.aspx"><span>لائحة الهيئات السياسية المشاركة</span></a></li>    
+                                    <li><a href="http://www.elections.ma/elections/communales/candidature.aspx">إحصائيات الترشيحات</a></li>
+							        <li><a href="http://www.elections.ma/elections/communales/resultats.aspx"><span>نتائج الانتخابات الجماعية</span></a></li>
+                                    <li><a href="http://www.elections.ma/elections/communales/resultats_bureaux.aspx"><span>نتائج انتخاب مكاتب المجالس الجماعية</span></a></li>
+                                    <li><a href="http://www.elections.ma/elections/communales/resultats_bureaux_arrondissement.aspx"><span>نتائج انتخاب مكاتب مجالس المقاطعات</span></a></li>
+							                
+            					</ul>
+            				</li>
+							<li class="panel"><div class="MenuGrouper"><a data-toggle="collapse" data-parent="#accordion" href="http://www.elections.ma/elections/legislatives/resultats.aspx#collapsefour" class="collapsed" aria-expanded="false"><span>انتخابات مجالس العمالات والأقاليم</span> </a>	</div>
+								<ul id="collapsefour" class="panel-collapse collapse" aria-expanded="false">
+							            <li><a href="http://www.elections.ma/elections/prov_pref/resultats.aspx"><span>نتائج انتخاب مجالس العمالات والأقاليم</span></a></li>    
+                                        <li><a href="http://www.elections.ma/elections/prov_pref/resultats_bureaux.aspx"><span>نتائج انتخاب مكاتب مجالس العمالات والأقاليم</span></a></li>        
+            					</ul>
+							</li>
+							<li class="panel"><div class="MenuGrouper"> <a data-toggle="collapse" data-parent="#accordion" href="http://www.elections.ma/elections/legislatives/resultats.aspx#collapsefive" class="collapsed" aria-expanded="false"><span>انتخابات مجلس المستشارين</span> </a></div>
+								<ul id="collapsefive" class="panel-collapse collapse" aria-expanded="false">
+							            <li><a href="http://www.elections.ma/elections/conseillers/resultats.aspx"><span>نتائج انتخابات مجلس المستشارين</span></a></li>
+            					</ul>
+							</li>
+						</ul>                        							
+						
+                        
+                        <div class="clearfix"></div>
+                    </nav>
+
+                     <section id="sideCalendar" class="block hidden-xs">
+                        <div class=" title grey">
+                            المذكرة الانتخابية
+                        </div>
+                        <div class="panel panel-default">
+						    <div class="row">
+							    <div class="col-xs-12 stiker">
+								    <ul class="electoral_calendar" style="overflow-y: hidden; height: 172px;">                                        
+                                        
+                                        
+                                        
+
+                                        
+								    <li style="" class="news-item">
+                                             <article class="calendar_line">
+                                                <time dir="rtl" style="color:#ff6a00"> السبت 24 سبتمبر 2016</time>
+                                                <span>
+                                                    انطلاق الحملة الانتخابية الخاصة 
+                                                    بانتخاب أعضاء مجلس النواب
+                                                </span>
+                                            </article>
+									    </li><li style="" class="news-item">
+                                            <article class="calendar_line">
+                                                <time dir="rtl" style="color:#ff6a00"> الجمعة 7 أكتوبر 2016 </time>
+                                                <span>
+                                                    تاريخ الإقتراع الخاص بانتخاب أعضاء مجلس النواب
+                                                </span>
+                                            </article>
+									    </li><li style="display:none;" class="news-item">
+                                             <article class="calendar_line">
+                                                <time dir="rtl" style="color:#ff6a00"> الأربعاء 14 سبتمبر 2016 </time>
+                                                <span>
+                                                    انطلاق عملية إيداع التصريحات  بالترشيح الخاصة
+                                                    بانتخاب أعضاء مجلس النواب
+                                                </span>
+                                            </article>
+									    </li></ul>
+                                    
+							    </div>
+						    </div>
+                            <div class="calendar_month">
+                                <a href="http://www.elections.ma/calendrier-electoral.aspx">المزيد</a>
+                            </div>
+				        </div>
+                        
+                    </section>
+                                                                                    
+                </div>
+
+            </div>
+
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 pull-right">
+
+                    <nav class="col-sm-4 col-xs-6">
+                        <div class="headline">
+                            حول الموقع
+                        </div>
+
+                        <ul dir="rtl" style="min-height: 60px;">
+                            <li><a href="http://www.elections.ma/site-map.aspx">خريطة الموقع</a></li>
+                            <li><a href="http://www.elections.ma/elections/legislatives/resultats.aspx#" data-toggle="modal" data-target="#MentionLegalesModal">بيانات قانونية</a></li>
+                        </ul>
+                    </nav>
+
+                    <nav class="col-sm-4 col-xs-6">
+                        <div class="headline">
+                            وصول سريع
+                        </div>
+
+                        <ul dir="rtl" style="min-height: 60px;">
+                            <li><a href="http://www.elections.ma/electeur/legislatives/mon_bureau_vote.aspx">التعرف على مكتب التصويت</a></li>       
+							<li><a href="http://www.elections.ma/electeur/legislatives/comment_voter.aspx">كيفية التصويت</a></li>
+                            <li><a href="http://www.elections.ma/decoupage.aspx">التقطيع الجماعي</a></li>
+                        </ul>
+                    </nav>
+
+                    <nav class="col-sm-4 col-xs-12">
+                        <div class="headline">
+                            مواقع مفيدة
+                        </div>
+
+                        <ul dir="rtl" style="min-height: 60px;">
+                            <li><a target="_blank" href="https://www.listeselectorales.ma/">الموقع الخاص باللوائح الانتخابية</a></li>
+                            <li><a target="_blank" href="http://www.femmes-moucharaka.elections.gov.ma/">صندوق الدعم لتشجيع تمثيلية النساء</a></li>
+                            <li><a target="_blank" href="http://www.pncl.gov.ma/">البوابة الوطنية للجماعات الترابية</a></li>
+                        </ul>
+                    </nav>
+               	</div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="container clearfix copyright">
+                        <div class="col-sm-12">
+                            جميع الحقوق محفوظة - 2016 ©
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+     <div class="modal fade modal-lg" id="MentionLegalesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="direction: rtl;">
+            <div class="modal-dialog scroll-modal-dialog" role="document" style="max-width: 900px; max-height: 600px; height: auto;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        <h4 class="modal-title" id="myModalLabel" style="text-align: center !important;">بيانات قانونية</h4>
+                    </div>
+                    <div class="modal-body scroll-body-dialog">
+                        <div style="direction: rtl; text-align: justify; padding: 10px">
+                            <p>
+                                أنشئ الموقع الالكتروني "www.elections.ma" لتقديم معلومات وإحصائيات حول مختلف العمليات الانتخابية التي ستعرفها المملكة المغربية ابتداء من سنة 2015.<br>
+                                تحتفظ وزارة الداخلية بالحق في تغيير أو تعديل أو تحيين محتويات الموقع وكذا "الشروط العامة" في أي وقت وبدون سابق إنذار.
+
+                            </p>
+                            <h2>تقديم </h2>
+                            <p>
+                                يهدف موقع "www.elections.ma" إلى تقديم معلومات للاستعمال الشخصي لزائريه، وبولوج الموقع يوافق الزائر على الالتزام بالشروط العامة والأحكام المفصلة أسفله والقوانين المعمول بها في المملكة المغربية. 
+                            </p>
+                            <h2>المقتضيات القانونية المطبقة </h2>
+                            <p>
+                                تم إعداد هذا الموقع ومحتواه وفقا للمقتضيات القانونية المعمول بها في المملكة المغربية، ويبقى الولوج إليه واستعماله وفق "الشروط العامة" خاضعين للقانون المغربي والاختصاص الحصري للمحاكم المغربية، حتى لو تم ذلك من خارج تراب المملكة المغربية. 
+                            </p>
+                            <h2>حقوق الملكية الفكرية</h2>
+                            <p>
+                                إن المعلومات والصور ومقاطع الفيديو المعروضة في هذا الموقع محمية بموجب حقوق المؤلف وفقا لأحكام القانون رقم 00-2 الصادر بتاريخ 15 فبراير 2000 المتعلق بحقوق المؤلف والحقوق المجاورة، كما تم تعديله وتتميمه بالقانون رقم 05-34 الصادر بتاريخ 14 فبراير 2006 والقانون رقم 12-79 الصادر بتاريخ 20 ماي 2014.<br>
+                                يعتبر كل استنساخ أو تعديل، كلي أو جزئي، للنصوص أو البيانات الواردة في هذا الموقع، بأي وسيلة كانت، دون الحصول على موافقة كتابية من وزارة الداخلية، غير قانوني ويعرض القائم به للمتابعة القانونية.
+
+                            </p>
+                            <h2>حماية المعطيات الشخصية</h2>
+                            <p>
+                                يتم الولوج إلى موقع "www.elections.ma" دون الحاجة إلى الكشف عن هوية الزائر أو تقديم أية معلومات شخصية عنه.<br>
+                                تخضع المعلومات والمعطيات الشخصية التي يمكن تقديمها خلال تصفح هذا الموقع إلى الحماية القانونية التي يضمنها القانون رقم 09-08 بتاريخ 18 فبراير 2009 المتعلق بحماية الأشخاص الذاتيين تجاه معالجة المعطيات ذات الطابع الشخصي.<br>
+                                يمنح كل زائر للموقع جميع الحقوق القابلة للنقل لوزارة الداخلية ويخول لها حق استعمال المعلومات والمعطيات التي يمكن أن يقدمها خلال تصفح هذا الموقع.<br>
+                                تعتبر المعلومات المقدمة من قبل الزائر غير سرية، ويجب أن تكون دقيقة، قانونية وغير مضرة بمصالح أطراف أخرى.
+
+                            </p>
+                            <h2>الروابط</h2>
+                            <p>
+                                يسمح لأي موقع إلكتروني عام أو خاص أن ينشئ، دون الحصول على إذن مسبق، رابطا للإحالة على هذا الموقع شريطة ذكر اسم وعنوان الموقع "www.elections.ma"، إلا أن هذه الروابط لا يجب أن تستخدم لأغراض تجارية أو دعائية، كما لا يجب أن تنشر صفحات هذا الموقع داخل صفحات موقع آخر.<br>
+                                لا تضمن وزارة الداخلية استقرار الروابط التي تحيل على هذا الموقع.
+
+                            </p>
+                            <h2>محتويات الموقع</h2>
+                            <p>
+                                تعمل وزارة الداخلية على توفير معلومات وأدوات صحيحة ومدققة لزوار ومستعملي هذا الموقع، إلا أنها تبقى غير مسؤولة عن الأخطاء المحتملة أو عدم توفر المعلومات أو وجود فيروسات على الموقع.<br>
+                                إن المعلومات والمعطيات التي يقدمها الموقع لا تعفي المستعملين لها من القيام بكل تدقيق إضافي أو خاص. لا تضمن وزارة الداخلية دقة وتمام وراهنية المعلومات المنشورة على الموقع. ولذلك يوافق زائر الموقع على استعمال هذه المعلومات تحت مسؤوليته الشخصية والحصرية.<br>
+                                يجب التذكير على أن الولوج أو البقاء عن طريق الاحتيال في الأنظمة المعلوماتية، أوعرقلة عملها، أو إدخال أو تعديل البيانات عن طريق الاحتيال في الأنظمة المعلوماتية تشكل جرائم يعاقب عليها القانون الجنائي.
+                            </p>
+                            <h2>المسؤولية </h2>
+                            <p>
+                                يخضع استعمال موقع "www.elections.ma" للمسؤولية الشخصية للزائر ولا يمكن في أي حال من الأحوال أن تكون وزارة الداخلية مسؤولة عن الأضرار المباشرة أو غير المباشرة التي قد تنجم عن استخدام هذا الموقع والقرارات التي تتخذ بناء على المعلومات والبيانات الواردة فيه.
+                            </p>
+                            <h2>القوة القاهرة</h2>
+                            <p>
+                                تعتبر وزارة الداخلية غير ملزمة بتنفيذ التزاماتها في حالة تعرضها لأي قوة قاهرة.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">إغلاق</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+<script id="f5_cspm">(function(){var f5_cspm={f5_p:'HIBMAPAPHCJBCMLMCDGKLFKEDFLEICJCPFDDJJEGOCMLCGLLPPEBGDKIKNIFHOIIHDIBLICDCNOKLCHCADEABIENABIBCCMPDHCFANFKCAIKNCOPNJLCHMHJONBAIMBA',setCharAt:function(str,index,chr){if(index>str.length-1)return str;return str.substr(0,index)+chr+str.substr(index+1);},get_byte:function(str,i){var s=(i/16)|0;i=(i&15);s=s*32;return((str.charCodeAt(i+16+s)-65)<<4)|(str.charCodeAt(i+s)-65);},set_byte:function(str,i,b){var s=(i/16)|0;i=(i&15);s=s*32;str=f5_cspm.setCharAt(str,(i+16+s),String.fromCharCode((b>>4)+65));str=f5_cspm.setCharAt(str,(i+s),String.fromCharCode((b&15)+65));return str;},set_latency:function(str,latency){latency=latency&0xffff;str=f5_cspm.set_byte(str,40,(latency>>8));str=f5_cspm.set_byte(str,41,(latency&0xff));str=f5_cspm.set_byte(str,35,2);return str;},wait_perf_data:function(){try{var wp=window.performance.timing;if(wp.loadEventEnd>0){var res=wp.loadEventEnd-wp.navigationStart;if(res<60001){var cookie_val=f5_cspm.set_latency(f5_cspm.f5_p,res);window.document.cookie='f5avr0111475592aaaaaaaaaaaaaaaa='+encodeURIComponent(cookie_val)+';path=/';}
+return;}}
+catch(err){return;}
+setTimeout(f5_cspm.wait_perf_data,100);return;},go:function(){var chunk=window.document.cookie.split(/\s*;\s*/);for(var i=0;i<chunk.length;++i){var pair=chunk[i].split(/\s*=\s*/);if(pair[0]=='f5_cspm'&&pair[1]=='1234')
+{var d=new Date();d.setTime(d.getTime()-1000);window.document.cookie='f5_cspm=;expires='+d.toUTCString()+';path=/;';setTimeout(f5_cspm.wait_perf_data,100);}}}}
+f5_cspm.go();}());</script></body></html>
