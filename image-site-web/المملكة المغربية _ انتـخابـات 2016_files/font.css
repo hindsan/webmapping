@@ -1,0 +1,10 @@
+﻿@font-face {
+    font-family: 'arabic_webfont';
+     src: url('./fonts/arabic_webfont.eot');
+     src: local('arabic_webfont'), 
+		 url('./arabic_webfont.eot?#iefix') format('embedded-opentype'),
+         url('./arabic_webfont.woff2') format('woff2'),
+         url('./arabic_webfont.woff') format('woff'),
+         url('./arabic_webfont.ttf') format('truetype'),
+         url('./arabic_webfont.svg#arabic_webfont') format('svg');
+}

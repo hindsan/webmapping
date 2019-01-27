@@ -1,0 +1,353 @@
+﻿$(function () {
+
+                var str = location.href.toLowerCase();
+                var selecteur = ".sideMenu li li  a";
+                $(selecteur).each(function () {
+                    if (str.indexOf($(this).attr("href").toLowerCase()) > -1) {
+                        //  $("li.current-menu-item").removeClass("current-menu-item");
+                        $(this).parent("li").addClass("active");
+                        $(this).parents("li.panel").find(".MenuGrouper a").trigger("click");
+                    }
+                });
+
+                $('.dropdown').hover(function() {
+                  jQuery(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn();
+                }, function() {
+                  jQuery(this).find('.dropdown-menu').stop(true, true).delay(400).fadeOut();
+                });
+
+                $(window).resize(function() { 
+                	$('.news_content').css('width', '100%').css('width', '-=20px');
+                	eqHeight(".lastContentLine .block");
+					eqHeight("footer ul");
+					if(window.matchMedia('(min-width: 767px)').matches) {
+						$(".sidebar").removeAttr('style');
+						$(".sidebar.opened").removeClass("opened").addClass("closed");
+						$("#closeOpenSideMenu").removeAttr('style');
+					} 
+
+                });
+                $(window).trigger('resize');
+                
+                $('.message').SetScroller({
+					velocity: 60,
+					direction: 'horizontal',
+					startfrom: 'left',
+					loop: 'infinite',
+					movetype: 'linear',
+					onmouseover: 'pause',
+					onmouseout: 'play',
+					onstartup: 'play',
+					cursor: 'default'
+				});
+                
+				$("#closeOpenSideMenuButton").click(function(e) {
+					if($(e.target).hasClass("opened")) {							
+										$("#closeOpenSideMenu").animate({right: "9px"});
+										$(".sidebar").animate({width: "0px"},function() {
+
+										}); 
+										$(".sidebar").addClass("closed").removeClass("opened");
+											$("#closeOpenSideMenuButton").addClass("closed").removeClass("opened");
+
+					}else{
+										$(".sidebar").animate({width: "220px"},1000,function() {
+											$(".sidebar").addClass("opened").removeClass("closed");
+											$("#closeOpenSideMenuButton").addClass("opened").removeClass("closed");
+										});
+										
+										$("#closeOpenSideMenu").animate({right: "216px"},1000);
+										
+					}
+				});
+				$(window).scroll(function(){
+   					if ($(window).scrollTop() <= $('.sidebar').outerHeight() - 90) {  
+   					      						$("#closeOpenSideMenu").css('top', $(window).scrollTop());
+   					}
+   					//console.log($(window).scrollTop())
+				});
+				$('section[data-contentForMobile][data-contentForMobile!=""]').each(function() {
+					$(this).html($("#" + $(this).data('contentformobile')).html())
+	            });
+
+                
+
+});
+eqHeight = function (query) {
+	var highestBox = 0;
+	$(query).each(function(){
+		if($(this).height() > highestBox) 
+		    highestBox = $(this).height(); 
+	});
+	$(query).css("min-height", highestBox);    
+}
+
+
+
+function getInternetExplorerVersion()
+    // Returns the version of Internet Explorer or a -1
+    // (indicating the use of another browser).
+{
+    var rv = -1; // Return value assumes failure.
+    if (navigator.appName == 'Microsoft Internet Explorer') {
+        var ua = navigator.userAgent;
+        var re = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+        if (re.exec(ua) != null)
+            rv = parseFloat(RegExp.$1);
+    }
+    return rv;
+}
+function checkVersion() {
+    
+    var ver = getInternetExplorerVersion();
+
+    if (ver > -1) {
+        if (ver <= 9.0) {
+            window.location.replace("http://elections2015-ie.mi-app.ma/");
+        }
+    } 
+}
+$(document).ready(function () {
+   // checkVersion();
+});
+//$(window).load(function () {
+//    // executes when complete page is fully loaded, including all frames, objects and images
+//    checkVersion();
+//});
+
+
+$(function () {
+    $(".electoral_calendar").bootstrapNews({
+        newsPerPage: 2,
+        autoplay: true,
+        pauseOnHover:true,
+        direction: 'up',
+        navigation: false,
+        newsTickerInterval: 1600,
+        onToDo: function () {
+            //console.log(this);
+        }
+    });
+    if ($("#contentBlock").height() < $(".sidebar").height()) {
+       // alert($(".sidebar").height());
+       //$("#contentBlock").css("min-height", $(".sidebar").height() - parseInt($("#contentBlock").css("margin-bottom")));
+		$("#contentBlock").css("min-height", $(".sidebar").height());
+
+    }
+});
+
+$(function () {
+    var msg1 = "ستفتح هذه الفقرة بعد انتهاء انتخاب أعضاء مجالس العمالات و الأقاليم";
+    var msg2 = "ستفتح هذه الفقرة بعد اقتراع يوم 4 شتنبر 2015";
+    var msg3 = "ستفتح هذه الفقرة بعد اقتراع يوم 2 أكتوبر 2015";
+    var msg4 = "ستفتح هذه الصفحة عقب انتهاء عملية ايداع الترشيحات";
+    var msg5 = "ستفتح هذه الصفحة عقب انتهاء عملية فرز الأصوات";
+    var msg6 = "ستفتح هذه الصفحة عقب انتهاء عملية التسجيل في اللوائح الانتخابية العامة";
+
+    $(".fermeture_ele1, .fermeture_ele2, .fermeture_ele3, .fermeture_ele4, .fermeture_ele5, .fermeture_ele6").attr("href", "#");
+
+    $(".fermeture_ele1").qtip({
+        content: {
+            text: function (api) {
+                return msg1;
+            },
+            title: function (api) {
+                return "<span style='float:right;text-align:right;font-size: 12pt'>معلومة هامة</span>";
+            },
+            style: {
+                name: 'light',
+                title: { 'font-size': 12, padding: 5, background: '#A2D959', textAlign: 'center' },
+                background: '#A2D959',
+                color: 'black',
+                textAlign: 'center',
+                border: {
+                    width: 7,
+                    radius: 5,
+                    color: '#A2D959'
+                }
+            }
+        },
+        position: {
+            my: 'top left',  // Position my top left...
+            at: 'bottom right', // at the bottom right of...
+            target: 'mouse',
+            adjust: { mouse: true, x: 15, y: 15 },
+            tooltip: 'bottomLeft'
+        }
+    });
+    $(".fermeture_ele2").qtip({
+        content: {
+            text: function (api) {
+                return msg2;
+            },
+            title: function (api) {
+                return "<span style='float:right;text-align:right;font-size: 12pt'>معلومة هامة</span>";
+            },
+            style: {
+                name: 'light',
+                title: { 'font-size': 12, padding: 5, background: '#A2D959', textAlign: 'center' },
+                background: '#A2D959',
+                color: 'black',
+                textAlign: 'center',
+                border: {
+                    width: 7,
+                    radius: 5,
+                    color: '#A2D959'
+                }
+            }
+        },
+        position: {
+            my: 'top left',  // Position my top left...
+            at: 'bottom right', // at the bottom right of...
+            target: 'mouse',
+            adjust: { mouse: true, x: 15, y: 15 },
+            tooltip: 'bottomLeft'
+        }
+    });
+    $(".fermeture_ele3").qtip({
+        content: {
+            text: function (api) {
+                return msg3;
+            },
+            title: function (api) {
+                return "<span style='float:right;text-align:right;font-size: 12pt'>معلومة هامة</span>";
+            },
+            style: {
+                name: 'light',
+                title: { 'font-size': 12, padding: 5, background: '#A2D959', textAlign: 'center' },
+                background: '#A2D959',
+                color: 'black',
+                textAlign: 'center',
+                border: {
+                    width: 7,
+                    radius: 5,
+                    color: '#A2D959'
+                }
+            }
+        },
+        position: {
+            my: 'top left',  // Position my top left...
+            at: 'bottom right', // at the bottom right of...
+            target: 'mouse',
+            adjust: { mouse: true, x: 15, y: 15 },
+            tooltip: 'bottomLeft'
+        }
+    });
+    $(".fermeture_ele4").qtip({
+        content: {
+            text: function (api) {
+                return msg4;
+            },
+            title: function (api) {
+                return "<span style='float:right;text-align:right;font-size: 12pt'>معلومة هامة</span>";
+            },
+            style: {
+                name: 'light',
+                title: { 'font-size': 12, padding: 5, background: '#A2D959', textAlign: 'center' },
+                background: '#A2D959',
+                color: 'black',
+                textAlign: 'center',
+                border: {
+                    width: 7,
+                    radius: 5,
+                    color: '#A2D959'
+                }
+            }
+        },
+        position: {
+            my: 'top left',  // Position my top left...
+            at: 'bottom right', // at the bottom right of...
+            target: 'mouse',
+            adjust: { mouse: true, x: 15, y: 15 },
+            tooltip: 'bottomLeft'
+        }
+    });
+    $(".fermeture_ele5").qtip({
+        content: {
+            text: function (api) {
+                return msg5;
+            },
+            title: function (api) {
+                return "<span style='float:right;text-align:right;font-size: 12pt'>معلومة هامة</span>";
+            },
+            style: {
+                name: 'light',
+                title: { 'font-size': 12, padding: 5, background: '#A2D959', textAlign: 'center' },
+                background: '#A2D959',
+                color: 'black',
+                textAlign: 'center',
+                border: {
+                    width: 7,
+                    radius: 5,
+                    color: '#A2D959'
+                }
+            }
+        },
+        position: {
+            my: 'top left',  // Position my top left...
+            at: 'bottom right', // at the bottom right of...
+            target: 'mouse',
+            adjust: { mouse: true, x: 15, y: 15 },
+            tooltip: 'bottomLeft'
+        }
+    });
+    $(".fermeture_ele6").qtip({
+        content: {
+            text: function (api) {
+                return msg6;
+            },
+            title: function (api) {
+                return "<span style='float:right;text-align:right;font-size: 12pt'>معلومة هامة</span>";
+            },
+            style: {
+                name: 'light',
+                title: { 'font-size': 12, padding: 5, background: '#A2D959', textAlign: 'center' },
+                background: '#A2D959',
+                color: 'black',
+                textAlign: 'center',
+                border: {
+                    width: 7,
+                    radius: 5,
+                    color: '#A2D959'
+                }
+            }
+        },
+        position: {
+            my: 'top left',  // Position my top left...
+            at: 'bottom right', // at the bottom right of...
+            target: 'mouse',
+            adjust: { mouse: true, x: 15, y: 15 },
+            tooltip: 'bottomLeft'
+        }
+    });
+    
+});
+
+$(function () {
+    $(".content-slider").lightSlider({
+        item: 1,
+        loop: true,
+        auto: true,
+        speed: 1000,
+        pause: 3500,
+        adaptiveHeight: true,
+        rtl: true,
+        enableTouch: true,
+        enableDrag: true,
+        pauseOnHover: true,
+        keyPress: true
+    });
+});
+
+$(function () {
+
+    // For the Second level Dropdown menu, highlight the parent	
+    $(".dropdown-menu")
+	.mouseenter(function () {
+	    $(this).parent('li').addClass('active');
+	})
+	.mouseleave(function () {
+	    $(this).parent('li').removeClass('active');
+	});
+
+});

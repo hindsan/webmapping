@@ -1,0 +1,48 @@
+function width_annex(){
+	var ua = window.navigator.userAgent;
+     var msie = ua.indexOf("MSIE ");
+            
+	$(".select_annex").mousedown(function() { 
+		if (msie > 0/*$.browser.msie*/) {$(this).css("width", "auto");} 
+	}); 
+	$(".select_annex").change(function() { 
+		if (msie > 0) { $(this).width(200); } 
+	}); 
+	$(".select_annex").blur(function() { 
+		if (msie > 0) { $(this).width(200); } 
+	});
+	
+	$(".select_commune").mousedown(function() { 
+		if (msie > 0/*$.browser.msie*/) {$(this).css("width", "auto");} 
+	}); 
+	$(".select_commune").change(function() { 
+		if (msie > 0) { $(this).width(140); } 
+	}); 
+	$(".select_commune").blur(function() { 
+		if (msie > 0) { $(this).width(140); } 
+	});
+
+}
+
+
+
+$(document).ready(function () {
+    $('input[type=text], input[type=password]').addClass('ui-widget-text');
+    $('input[type=button], input[type=submit], input[type=reset]').addClass('ui-button');
+    $('textarea').addClass('ui-widget-text');
+    $('input[type=file]').addClass('ui-widget-text');
+    $("select:not([multiple])").addClass('ui-widget-text');
+    $("select[multiple]").addClass('ui-widget-text');
+
+    /*
+    width_annex();
+	
+	var trigger = "<img class='trigger' src='css/images/calendar_trigger.gif'>";
+    $(".date-pick-ar, .date-pick_cnie-ar").after(trigger);
+
+    $(".trigger").click(function () {
+        $(this).prev().datepicker('show');
+    });
+    */ 
+  
+});

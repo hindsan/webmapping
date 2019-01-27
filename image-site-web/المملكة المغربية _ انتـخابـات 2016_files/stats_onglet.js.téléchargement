@@ -1,0 +1,14 @@
+$(document).ready(function () {
+    $(".ong_stat").removeClass("act");
+
+    $('.ong_stat').click(function () {
+        $(".ong_data").hide();
+        $(".ong_stat").removeClass("act");
+        $(this).addClass("act");
+        var str = $(this).attr("id");
+        var res = str.substr(5, 4);
+        $('#' + res).show();
+
+    });
+
+});
